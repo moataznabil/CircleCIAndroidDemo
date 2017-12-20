@@ -42,7 +42,7 @@ test:
     - adb logcat -d
 
     # run tests  against the emulator.
-    - ./gradlew connectedAndroidTest -PdisablePreDex
+    - ADB_INSTALL_TIMEOUT=8 ./gradlew connectedAndroidTest -PdisablePreDex
     # copy the build outputs to artifacts
     - cp -r app/build/outputs $CIRCLE_ARTIFACTS
     # copy the test results to the test results directory.

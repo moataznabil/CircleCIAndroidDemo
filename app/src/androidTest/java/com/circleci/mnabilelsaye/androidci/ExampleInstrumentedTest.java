@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.circleci.mnabilelsaye.androidci", appContext.getPackageName());
+        assertEquals("io.circleci.moataznabil", appContext.getPackageName());
     }
 }
