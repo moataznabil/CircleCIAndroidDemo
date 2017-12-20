@@ -8,6 +8,9 @@ general:
 
 machine:
     environment:
+        timezone: Europe/Berlin
+        java:
+          version: openjdk8
         PATH: "~/$CIRCLE_PROJECT_REPONAME/gradle-2.9/bin:$PATH"
         ANDROID_HOME: /usr/local/android-sdk-linux
         TERM: "dumb"
@@ -25,7 +28,7 @@ dependencies:
 test:
   override:
     # start the emulator
-    - emulator -avd circleci-android24 -no-audio -no-window:
+    - emulator -avd circleci-android22 -no-skin -no-audio -no-window -no-boot-anim:
         background: true
         parallel: true
     # wait for it to have booted
@@ -34,9 +37,23 @@ test:
     # unlock the emulator screen
     - sleep 30
     - adb shell input keyevent 82
+
+    # later we collect the logs from test run
+    - adb logcat -d
+
     # run tests  against the emulator.
     - ./gradlew connectedAndroidTest -PdisablePreDex
     # copy the build outputs to artifacts
     - cp -r app/build/outputs $CIRCLE_ARTIFACTS
     # copy the test results to the test results directory.
     - cp -r app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
+
+    # collect logs from emulator
+    - adb logcat -d > $CIRCLE_ARTIFACTS/logcat_emulator.txt
+
+
+# report coverage to coveralls
+#coverage:
+ # branch: [master, rewrite]
+ # commands:
+  #  - ./gradlew coveralls

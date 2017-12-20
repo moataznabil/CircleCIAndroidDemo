@@ -18,9 +18,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.*;
 
-/**
- * Created by mnabilelsaye on 20.12.17.
- */
 
 @RunWith(AndroidJUnit4.class)
 public class LoginActivityTest
