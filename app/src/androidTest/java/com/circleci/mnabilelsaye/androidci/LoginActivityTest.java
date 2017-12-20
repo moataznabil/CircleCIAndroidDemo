@@ -32,7 +32,6 @@ public class LoginActivityTest
         loginActivityActivityTestRule.launchActivity(null);
     }
 
-
     @Test
     public void userlogin()
     {
